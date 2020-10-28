@@ -1,13 +1,12 @@
 ---
 
 - name: YUM | Install lvm
-  yum: >
-    name={{ item }}
-    state=present
-  with_items:
-    - system-storage-manager
-    - sg3_utils
-    - lvm2
+  yum:
+    name:
+      - system-storage-manager
+      - sg3_utils
+      - lvm2
+    state: present
 
 - name: COMMAND | checking for scsi devices
   command: sg_scan
