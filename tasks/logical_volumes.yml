@@ -1,14 +1,14 @@
 ---
 
 - name: Unmount mount point
-  ansible.builtin.command: "umount {{ logical_volume.mount_point }}"
+  ansible.builtin.command: "umount /dev/{{ volume_group.vgname }}/{{ logical_volume.lvname }}"
   loop: "{{ volume_group.lvnames }}"
   loop_control:
     loop_var: logical_volume
   when: '"g" in logical_volume.size'
 
 - name: Check for errors
-  ansible.builtin.command: "e2fsck -fy {{ logical_volume.mount_point }}"
+  ansible.builtin.command: "e2fsck -fy /dev/{{ volume_group.vgname }}/{{ logical_volume.lvname }}"
   loop: "{{ volume_group.lvnames }}"
   loop_control:
     loop_var: logical_volume
@@ -16,7 +16,7 @@
   ignore_errors: true
 
 - name: Resize filesystem
-  ansible.builtin.command: "resize2fs  {{ logical_volume.mount_point }} {{ logical_volume.size | upper }}"
+  ansible.builtin.command: "resize2fs /dev/{{ volume_group.vgname }}/{{ logical_volume.lvname }} {{ logical_volume.size | upper }}"
   loop: "{{ volume_group.lvnames }}"
   loop_control:
     loop_var: logical_volume
