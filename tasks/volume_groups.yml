@@ -1,0 +1,8 @@
+---
+
+- name: Run through all volume groups
+  ansible.builtin.include_tasks:
+    file: "logical_volumes.yml"
+  loop: "{{ lvm_groups }}"
+  loop_control:
+    loop_var: volume_group

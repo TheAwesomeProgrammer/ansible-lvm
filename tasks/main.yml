@@ -8,6 +8,10 @@
   include: centos.yml
   when: ansible_os_family == "RedHat"
 
+- name: INCLUDE | resize filesystem
+  include: manage_lvm.yml
+  when: volume_groups.yml
+
 - name: INCLUDE | Apply
   include: manage_lvm.yml
   when: lvm_apply
