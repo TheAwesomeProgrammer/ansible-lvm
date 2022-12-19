@@ -1,17 +1,21 @@
 ---
 
 - name: INCLUDE | Debian family
-  include: debian.yml
+  ansible.builtin.include_tasks:
+    file: "debian.yml"
   when: ansible_os_family == "Debian"
 
 - name: INCLUDE | RedHat family
-  include: centos.yml
+  ansible.builtin.include_tasks:
+    file: "centos.yml"
   when: ansible_os_family == "RedHat"
 
-- name: INCLUDE | resize filesystem
-  include: volume_groups.yml
+- name: INCLUDE | Resize filesystems
+  ansible.builtin.include_tasks:
+    file: "volume_groups.yml"
   when: lvm_apply
 
 - name: INCLUDE | Apply
-  include: manage_lvm.yml
+  ansible.builtin.include_tasks:
+    file: "manage_lvm.yml"
   when: lvm_apply
