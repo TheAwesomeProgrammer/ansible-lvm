@@ -2,9 +2,9 @@
 
 - name: Run through all logical volumes
   ansible.builtin.command: |
-    "umount {{ logical_volume.mount_point }}"
-    "e2fsck -fy {{ logical_volume.mount_point }}"
-    "resize2fs  {{ logical_volume.mount_point }} {{ logical_volume.size | upper }} "
+    umount "{{ logical_volume.mount_point }}"
+    e2fsck -fy "{{ logical_volume.mount_point }}"
+    resize2fs  "{{ logical_volume.mount_point }} {{ logical_volume.size | upper }}"
   loop: "{{ volume_group.lvnames }}"
   loop_control:
     loop_var: logical_volume
