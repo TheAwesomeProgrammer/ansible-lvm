@@ -5,7 +5,7 @@
     "umount {{ logical_volume.mount_point }}"
     "e2fsck -fy {{ logical_volume.mount_point }}"
     "resize2fs  {{ logical_volume.mount_point }} {{ logical_volume.size | upper }} "
-  loop: "{{ lvm_groups }}"
+  loop: "{{ volume_group }}"
   loop_control:
     loop_var: logical_volume
   when: '"g" in logical_volume.size'
