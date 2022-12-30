@@ -22,3 +22,4 @@
   loop_control:
     loop_var: logical_volume
   when: '"g" in logical_volume.size'
+  ignore_errors: true
