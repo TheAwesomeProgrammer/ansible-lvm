@@ -6,6 +6,7 @@
   loop_control:
     loop_var: logical_volume
   when: '"g" in logical_volume.size'
+  ignore_errors: true
 
 - name: Check for errors
   ansible.builtin.command: "e2fsck -fy /dev/{{ volume_group.vgname }}/{{ logical_volume.lvname }}"
